@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de Mesas - Cristina & Ussumane</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: #f7f5f0;
+    text-align: center;
+}
+
+.brand-title {
+    color: #b89759;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 10px;
+    text-transform: uppercase;
+}
+
+h1 {
+    color: #555;
+    font-size: 17px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #b89759;
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+    background: white;
+}
+
+.search-input:focus {
+    box-shadow: 0 0 12px #b8975966;
+}
+
+.no-results {
+    min-height: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px #0003;
+}
+
+.map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* MARCADORES DAS MESAS */
+
+.pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 9.5%;
+    height: 16%;
+    border-radius: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+}
+
+.pin.active {
+    opacity: 1;
+    background: rgba(255, 0, 0, .35);
+    border: 3px solid #ff2222;
+    box-shadow: 0 0 20px 8px rgba(255, 0, 0, .7);
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1.10);
+    }
+}
+
+/* ESPAÇOS ESPECIAIS */
+
+.pin.special {
+    width: 24%;
+    height: 18%;
+}
+
+.pin.pista {
+    width: 23%;
+    height: 24%;
+}
+
+@media(max-width:600px) {
+    body {
+        padding: 10px;
+    }
+
+    .brand-title {
+        font-size: 25px;
+    }
+
+    h1 {
+        font-size: 14px;
+    }
+
+    .search-input {
+        font-size: 14px;
+    }
+
+    .pin {
+        border-radius: 6px;
+        border-width: 2px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="brand-title">Cristina e Ussumane</div>
+
+<h1>Localizador de Mesas e Espaços</h1>
+
+<div class="search-container">
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Digite o número ou nome da mesa..."
+        autocomplete="off"
+        list="sugestoes-mesas"
+    >
+
+    <datalist id="sugestoes-mesas">
+        <option value="Mesa 1">
+        <option value="Mesa 2">
+        <option value="Mesa 3">
+        <option value="Mesa 4">
+        <option value="Mesa 5">
+        <option value="Mesa 6">
+        <option value="Mesa 7">
+        <option value="Mesa 8">
+        <option value="Mesa 9">
+        <option value="Mesa 10">
+        <option value="Mesa 11">
+        <option value="Mesa 12">
+        <option value="Mesa 13">
+        <option value="Mesa 14">
+        <option value="Mesa 15">
+        <option value="Mesa 16">
+        <option value="Mesa 17">
+        <option value="Mesa de Honra">
+        <option value="Pista">
+    </datalist>
+
+    <div id="statusMessage" class="no-results"></div>
+
+</div>
+
+<div class="map-wrapper">
+
+    <!-- IMAGEM DO MAPA 3D -->
+    <img
+        src="def08979-8c42-4762-9d0e-39d87e05d2dd.png"
+        class="map-image"
+        alt="Mapa 3D das mesas Cristina e Ussumane"
+    >
+
+    <!-- LADO ESQUERDO -->
+
+    <div class="pin" id="mesa2"
+         style="left:9.8%;top:19.3%;"></div>
+
+    <div class="pin" id="mesa1"
+         style="left:9.7%;top:38.8%;"></div>
+
+    <div class="pin" id="mesa5"
+         style="left:9.7%;top:58.8%;"></div>
+
+    <div class="pin" id="mesa7"
+         style="left:9.7%;top:77.8%;"></div>
+
+
+    <!-- CENTRO ESQUERDO -->
+
+    <div class="pin" id="mesa3"
+         style="left:31%;top:20%;"></div>
+
+    <div class="pin" id="mesa4"
+         style="left:30.9%;top:40%;"></div>
+
+    <div class="pin" id="mesa9"
+         style="left:30.7%;top:59.6%;"></div>
+
+    <div class="pin" id="mesa6"
+         style="left:30.7%;top:78.1%;"></div>
+
+
+    <!-- CENTRO DIREITO -->
+
+    <div class="pin" id="mesa10"
+         style="left:69.2%;top:20.1%;"></div>
+
+    <div class="pin" id="mesa12"
+         style="left:69.3%;top:39.7%;"></div>
+
+    <div class="pin" id="mesa14"
+         style="left:69.9%;top:59.5%;"></div>
+
+    <div class="pin" id="mesa8"
+         style="left:70.3%;top:78.3%;"></div>
+
+
+    <!-- LADO DIREITO -->
+
+    <div class="pin" id="mesa11"
+         style="left:84.6%;top:20.2%;"></div>
+
+    <div class="pin" id="mesa13"
+         style="left:83.2%;top:39.4%;"></div>
+
+    <div class="pin" id="mesa15"
+         style="left:84.6%;top:59.8%;"></div>
+
+    <div class="pin" id="mesa17"
+         style="left:84.5%;top:78.2%;"></div>
+
+    <div class="pin" id="mesa16"
+         style="left:95.4%;top:78%;"></div>
+
+
+    <!-- ESPAÇOS ESPECIAIS -->
+
+    <div class="pin special" id="honra"
+         style="left:48.5%;top:10%;"></div>
+
+    <div class="pin pista" id="pista"
+         style="left:49.5%;top:42%;"></div>
+
+</div>
+
+<script>
+
+const searchInput = document.getElementById("searchInput");
+const statusMessage = document.getElementById("statusMessage");
+const pins = document.querySelectorAll(".pin");
+
+/* LISTA DE MESAS */
+
+const mesas = {};
+
+for (let i = 1; i <= 17; i++) {
+    mesas[String(i)] = "mesa" + i;
+    mesas["mesa " + i] = "mesa" + i;
+}
+
+/* ESPAÇOS ESPECIAIS */
+
+mesas["honra"] = "honra";
+mesas["mesa de honra"] = "honra";
+mesas["pista"] = "pista";
+mesas["pista de danca"] = "pista";
+mesas["pista de dança"] = "pista";
+
+/* NORMALIZAR TEXTO */
+
+function normalizar(texto) {
+    return texto
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ");
+}
+
+/* PESQUISAR MESA */
+
+function pesquisarMesa() {
+
+    const query = normalizar(searchInput.value);
+
+    // Remover destaques anteriores
+    pins.forEach(pin => {
+        pin.classList.remove("active");
+    });
+
+    statusMessage.textContent = "";
+
+    if (query === "") {
+        return;
+    }
+
+    const targetId = mesas[query];
+
+    if (!targetId) {
+        statusMessage.style.color = "#d9534f";
+        statusMessage.textContent =
+            "Mesa não encontrada! Escolha uma mesa de 1 a 17.";
+        return;
+    }
+
+    const target = document.getElementById(targetId);
+
+    if (target) {
+
+        target.classList.add("active");
+
+        // Centrar o mapa na mesa encontrada
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center"
+        });
+
+        statusMessage.style.color = "green";
+
+        if (targetId === "honra") {
+            statusMessage.textContent =
+                "Mesa de Honra encontrada!";
+        }
+
+        else if (targetId === "pista") {
+            statusMessage.textContent =
+                "Pista de dança encontrada!";
+        }
+
+        else {
+            statusMessage.textContent =
+                "Mesa " +
+                targetId.replace("mesa", "") +
+                " encontrada!";
+        }
+    }
+}
+
+/* PESQUISA AUTOMÁTICA */
+
+searchInput.addEventListener("input", pesquisarMesa);
+
+searchInput.addEventListener("change", pesquisarMesa);
+
+</script>
+
+</body>
+</html>
